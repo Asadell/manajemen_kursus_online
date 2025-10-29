@@ -112,14 +112,10 @@ public class CourseManagementSystem {
     }
     
     private void addStudent() {
-        System.out.print("ID Mahasiswa: ");
-        String id = scanner.nextLine();
-        System.out.print("Nama: ");
-        String name = scanner.nextLine();
-        System.out.print("Email: ");
-        String email = scanner.nextLine();
-        System.out.print("Jurusan: ");
-        String major = scanner.nextLine();
+        String id = getInput("ID Mahasiswa: ");
+        String name = getInput("Nama: ");
+        String email = getInput("Email: ");
+        String major = getInput("Jurusan: ");
         
         Student student = new Student(id, name, email, major);
         studentRepository.add(student);
@@ -142,8 +138,7 @@ public class CourseManagementSystem {
     }
     
     private void searchStudent() {
-        System.out.print("Masukkan ID Mahasiswa: ");
-        String id = scanner.nextLine();
+        String id = getInput("Masukkan ID Mahasiswa: ");
         
         try {
             Student student = studentRepository.findById(id);
@@ -187,16 +182,12 @@ public class CourseManagementSystem {
     }
     
     private void addOnlineCourse() {
-        System.out.print("ID Kursus: ");
-        String id = scanner.nextLine();
-        System.out.print("Nama Kursus: ");
-        String name = scanner.nextLine();
+        String id = getInput("ID Kursus: ");
+        String name = getInput("Nama Kursus: ");
         System.out.print("Harga: ");
         double price = Double.parseDouble(scanner.nextLine());
-        System.out.print("ID Instruktur: ");
-        String instructorId = scanner.nextLine();
-        System.out.print("Link Meeting: ");
-        String meetingLink = scanner.nextLine();
+        String instructorId = getInput("ID Instruktur: ");
+        String meetingLink = getInput("Link Meeting: ");
         
         try {
             Instructor instructor = instructorRepository.findById(instructorId);
@@ -209,16 +200,12 @@ public class CourseManagementSystem {
     }
     
     private void addOfflineCourse() {
-        System.out.print("ID Kursus: ");
-        String id = scanner.nextLine();
-        System.out.print("Nama Kursus: ");
-        String name = scanner.nextLine();
+        String id = getInput("ID Kursus: ");
+        String name = getInput("Nama Kursus: ");
         System.out.print("Harga: ");
         double price = Double.parseDouble(scanner.nextLine());
-        System.out.print("ID Instruktur: ");
-        String instructorId = scanner.nextLine();
-        System.out.print("Lokasi: ");
-        String location = scanner.nextLine();
+        String instructorId = getInput("ID Instruktur: ");
+        String location = getInput("Lokasi: ");
         
         try {
             Instructor instructor = instructorRepository.findById(instructorId);
@@ -246,8 +233,7 @@ public class CourseManagementSystem {
     }
     
     private void searchCourse() {
-        System.out.print("Masukkan ID Kursus: ");
-        String id = scanner.nextLine();
+        String id = getInput("Masukkan ID Kursus: ");
         
         try {
             Course course = courseRepository.findById(id);
@@ -287,10 +273,8 @@ public class CourseManagementSystem {
     }
     
     private void enrollStudent() {
-        System.out.print("ID Mahasiswa: ");
-        String studentId = scanner.nextLine();
-        System.out.print("ID Kursus: ");
-        String courseId = scanner.nextLine();
+        String studentId = getInput("ID Mahasiswa: ");
+        String courseId = getInput("ID Kursus: ");
         
         try {
             Student student = studentRepository.findById(studentId);
@@ -324,8 +308,7 @@ public class CourseManagementSystem {
     }
     
     private void displayStudentCourses() {
-        System.out.print("Masukkan ID Mahasiswa: ");
-        String studentId = scanner.nextLine();
+        String studentId = getInput("Masukkan ID Mahasiswa: ");
         
         try {
             Student student = studentRepository.findById(studentId);
@@ -355,5 +338,10 @@ public class CourseManagementSystem {
         
         double totalRevenue = enrollmentManager.calculateTotalRevenue();
         System.out.println("Total Pendapatan: Rp " + totalRevenue);
+    }
+
+    private String getInput(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextLine().trim();
     }
 }
